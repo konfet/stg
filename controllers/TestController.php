@@ -85,8 +85,16 @@ class TestController extends Controller
             echo("Index Test");
         }
         
-        public function actionIndex2()
+        public function actionSendMail()
         {
-            echo("Index Test2");
+            \Yii::$app->mailer->compose()
+                 ->setFrom(['konfet@email.cz' => 'SLOTEGRATOR'])
+                 ->setTo('mskurlatov@gmail.com')
+                 ->setSubject('Тема сообщения!!!')
+                 ->setTextBody('Текст сообщения!!!!')
+                 ->setHtmlBody('<h1>текст сообщения в формате HTML</h1>')
+                 ->send();
+            return 'sent';
+            
         }
 }

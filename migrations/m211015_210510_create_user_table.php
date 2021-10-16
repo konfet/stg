@@ -18,7 +18,7 @@ class m211015_210510_create_user_table extends Migration
             'auth_key' => $this->string(32)->notNull(),
             'password_hash' => $this->string()->notNull(),
             'password_reset_token' => $this->string()->unique(),
-            'email' => $this->string()->notNull()->unique(),
+            'email' => $this->string()->notNull(),
             'status' => $this->string(10)->notNull()->defaultValue('active'),
             'bank_account' => $this->string(),
             'bonus_account' => $this->string(),

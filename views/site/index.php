@@ -2,52 +2,41 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Get your prize!';
 ?>
 <div class="site-index">
 
-    <div class="jumbotron text-center bg-transparent">
-        <h1 class="display-4">Congratulations!</h1>
+    <div>
+        <div class="promo">
+            <?php if(Yii::$app->session->hasFlash('userWasRegistered')): ?>
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>                
+            <!--        <h4><strong>Success!</strong></h4>-->
+                    <p>User <?= Yii::$app->session->getFlash('userWasRegistered'); ?> was successfully registered. Check your mail.</p>
+                    </div>    
+            <?php endif; ?>                                                                                                                      
+                                                
+            <h1><?= $this->title ?></h1>
+            <p>Only today! Every registered user gets a cool gift!</p>
+            <p>You can get:</p>
+            <ul>
+                <li>The money prize!</li>
+                <li>Bonus points!</li>
+                <li>Cool gifts!</li>                
+            </ul>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
-
+            <?php if (Yii::$app->user->isGuest):?>
+                <p>Register and win!</p>                
+                <p><?= \yii\helpers\Html::a('Sign up!', ['site/signup'], ['class' => 'btn btn-success']) ?></p>
+                <p><a href="<?= \yii\helpers\Url::to(['user/login']) ?>">Login for existing users</a></p>
+                </p>                
+            <?php else: ?>
+                <p><?= \yii\helpers\Html::a('Get your prize!', ['site/get-random-prize'], ['class' => 'btn btn-success']) ?></p>
+            <?php
+            endif;
+            ?>
+        </div>        
     </div>
 </div>

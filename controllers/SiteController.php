@@ -97,7 +97,31 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+    /**
+     * Signup 
+     *
+     * @return Response|string
+     */
+    public function actionSignup(){
 
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        $model = new \app\models\SignupForm();
+        if($model->load(\Yii::$app->request->post()) && $model->validate()){
+            $user = new \app\models\User();
+            $user->username = $model->username;
+            $user->password_hash = \Yii::$app->security->generatePasswordHash($model->password);
+            $user->email = $model->email;
+            if($user->save()){
+                $user->sendConfirmation($model->password);
+                Yii::$app->session->setFlash('userWasRegistered', $model->username);
+                return $this->goHome();                
+                //echo '<pre>'; print_r($user); die;                
+            }
+        }
+        return $this->render('signup', compact('model'));                        
+    }
     /**
      * Displays contact page.
      *
@@ -125,4 +149,11 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+    
+    public function actionGetRandomPrize()
+    {
+        return  __FILE__ ;
+    }
+    
+    
 }
