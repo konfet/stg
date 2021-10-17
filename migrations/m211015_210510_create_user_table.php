@@ -22,6 +22,8 @@ class m211015_210510_create_user_table extends Migration
             'status' => $this->string(10)->notNull()->defaultValue('active'),
             'bank_account' => $this->string(),
             'bonus_account' => $this->string(),
+            'address' => $this->string(),
+            'comment' => $this->string(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);

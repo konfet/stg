@@ -14,15 +14,16 @@ class m211016_074240_create_statistics_table extends Migration
     public function safeUp()
     {
         $this->createTable($this->tableName, [
-            'user_id' => $this->integer()->notNull(),
+            'id' => $this->primaryKey(),
+            'user_id' => $this->integer(),
             'money_received' => $this->integer()->notNull()->defaultValue(0),
             'money_transferred' => $this->integer()->notNull()->defaultValue(0),
             'money_converted_to_bonuses' => $this->integer()->notNull()->defaultValue(0),
             'bonuses_received' => $this->integer()->notNull()->defaultValue(0),
-            'money_converted_from_money' => $this->integer()->notNull()->defaultValue(0),
+            'bonuses_converted_from_money' => $this->integer()->notNull()->defaultValue(0),
             'bonuses_transferred' => $this->integer()->notNull()->defaultValue(0),
-            'items_received' => $this->string(5000),
-            'items_sent' => $this->string(5000),
+            'items_received' => $this->string(5000)->defaultValue(''),
+            'items_sent' => $this->string(5000)->defaultValue(''),
             
         ]);
         

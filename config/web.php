@@ -35,11 +35,19 @@ $config = [
             'useFileTransport' => false,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.seznam.cz',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
-                'username' => 'konfet@email.cz',
-                'password' => 'mmmskms',
+                'host' => 'smtp.gmail.com',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
+                'username' => 'login.for.test.purposes@gmail.com',
+                'password' => 'hmuemeiscwdekdbx',
+                //'password' => 'abyrvalg000',
                 'port' => '465', // Port 25 is a very common port too
                 'encryption' => 'ssl', // It is often used, check your provider or mail server specs
+                'streamOptions' => [ 
+                'ssl' => [ 
+                    'allow_self_signed' => true,
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                ],
+            ]
         ],
         ],
         'log' => [

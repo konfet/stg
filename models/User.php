@@ -7,6 +7,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use app\models\UserPrizes;
 /**
  * User model
  *
@@ -54,6 +55,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             ['status', 'default', 'value' => self::S_ACTIVE],
+            [['username', 'email', 'bank_account', 'bonus_account', 'address'], 'safe'],
         ];
     }
 
@@ -154,4 +156,33 @@ class User extends ActiveRecord implements IdentityInterface
              ->setHtmlBody($text)
              ->send();
     }
+    
+    public function getActiveMoney() {
+        $query = (new \yii\db\Query())->from('t_user_prizes')->where(['user_id' => $this->id, 'status' => UserPrizes::S_ACTIVE, 'type' => UserPrizes::T_MONEY]);
+        $res = $query->sum('value');
+        return $res ? $res : 0;        
+    }
+    
+    public function getActiveBonuses() {
+        $query = (new \yii\db\Query())->from('t_user_prizes')->where(['user_id' => $this->id, 'status' => UserPrizes::S_ACTIVE, 'type' => UserPrizes::T_BONUS]);
+        $res = $query->sum('value');
+        return $res ? $res : 0;        
+    }
+    
+    public function getActiveGifts() {
+        $query = (new \yii\db\Query())->from('t_user_prizes')->where(['user_id' => $this->id, 'status' => UserPrizes::S_ACTIVE, 'type' => UserPrizes::T_GIFT]);
+        return $query->count();
+        
+    }
+    
+    public function getStatistics() {
+        $stat = Statistics::find()->where(['user_id' => $this->id])->one();
+        if (!$stat) {
+            $stat = new Statistics();
+            $stat->user_id = $this->id;
+            $stat->save(false);
+        }
+        return $stat;        
+    }
+    
 }

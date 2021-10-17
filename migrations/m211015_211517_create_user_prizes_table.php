@@ -18,7 +18,8 @@ class m211015_211517_create_user_prizes_table extends Migration
             'type' => $this->string()->notNull(),
             'value' => $this->integer(),
             'item_id' => $this->integer(),
-            'status' => $this->string()->notNull()->defaultValue('created'),
+            'status' => $this->string()->notNull()->defaultValue('active'),
+            'comment' => $this->string(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);

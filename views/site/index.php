@@ -17,6 +17,18 @@ $this->title = 'Get your prize!';
                     <p>User <?= Yii::$app->session->getFlash('userWasRegistered'); ?> was successfully registered. Check your mail.</p>
                     </div>    
             <?php endif; ?>                                                                                                                      
+            
+            <?php if(Yii::$app->session->hasFlash('actionDone')): ?>
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>                
+                    <h4><strong>Action was done!</strong></h4>
+                    <p><?= Yii::$app->session->getFlash('actionDone'); ?></p>
+                    </div>    
+            <?php endif; ?>                                                                                                                                  
+            
+                                                                                                                                         
                                                 
             <h1><?= $this->title ?></h1>
             <p>Only today! Every registered user gets a cool gift!</p>
@@ -33,7 +45,7 @@ $this->title = 'Get your prize!';
                 <p><a href="<?= \yii\helpers\Url::to(['user/login']) ?>">Login for existing users</a></p>
                 </p>                
             <?php else: ?>
-                <p><?= \yii\helpers\Html::a('Get your prize!', ['site/get-random-prize'], ['class' => 'btn btn-success']) ?></p>
+                <p><?= \yii\helpers\Html::a('Get your prize!', ['site/get-random-prize'], ['class' => 'btn btn-success btn-lg']) ?></p>
             <?php
             endif;
             ?>

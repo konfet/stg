@@ -49,14 +49,15 @@ class Statistics extends \yii\db\ActiveRecord
     {
         return [
             'user_id' => 'User ID',
-            'money_received' => 'Money Received',
-            'money_transferred' => 'Money Transferred',
-            'money_converted_to_bonuses' => 'Money Converted To Bonuses',
-            'bonuses_received' => 'Bonuses Received',
-            'money_converted_from_money' => 'Money Converted From Money',
-            'bonuses_transferred' => 'Bonuses Transferred',
-            'items_received' => 'Items Received',
-            'items_sent' => 'Items Sent',
+            'money_received' => 'Total Money Received',
+            'money_transferred' => 'Total Money Transferred',
+            'money_converted_to_bonuses' => 'Total Money Converted To Bonuses',
+            'bonuses_converted_from_money' => 'Total Bonuses Converted From Money',
+            'bonuses_received' => 'Total Bonuses Received',
+            'money_converted_from_money' => 'Total Money Converted From Money',
+            'bonuses_transferred' => 'Total Bonuses Transferred',
+            'items_received' => 'Total Items Received',
+            'items_sent' => 'Total Items Sent',
         ];
     }
 
@@ -67,6 +68,6 @@ class Statistics extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(TUser::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }

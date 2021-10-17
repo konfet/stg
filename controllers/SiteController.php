@@ -13,14 +13,14 @@ use app\models\ContactForm;
 class SiteController extends Controller
 {
     /**
-     * {@inheritdoc}
+     * actions common for all users
      */
     public function behaviors()
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['logout'],                
                 'rules' => [
                     [
                         'actions' => ['logout'],
@@ -152,7 +152,12 @@ class SiteController extends Controller
     
     public function actionGetRandomPrize()
     {
-        return  __FILE__ ;
+        $model = \app\models\UserPrizes::getRandomPrize();
+        
+        return $this->render('randomPrize', [
+            'model' => $model,
+        ]);
+        
     }
     
     

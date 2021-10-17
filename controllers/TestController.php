@@ -1,7 +1,9 @@
 <?php 
 
 namespace app\controllers;
+
 use \yii2sshconsole\Controller;
+use app\models\Item;
 
 class TestController extends Controller
 {
@@ -85,10 +87,21 @@ class TestController extends Controller
             echo("Index Test");
         }
         
+        public function actionTestArray()
+        {
+            $arr = Item::find()->asArray()->all();
+            //echo '<pre>'; print_r($arr); die;                
+            $rand_key = array_rand($arr);
+            $pk_key = $arr[$rand_key]['id'];
+            return "selected: {$rand_key}, PK: {$pk_key}";
+            
+        }
+        
+        
         public function actionSendMail()
         {
             \Yii::$app->mailer->compose()
-                 ->setFrom(['konfet@email.cz' => 'SLOTEGRATOR'])
+                 ->setFrom(['login.for.test.purposes@gmail.com' => 'SLOTEGRATOR'])
                  ->setTo('mskurlatov@gmail.com')
                  ->setSubject('Тема сообщения!!!')
                  ->setTextBody('Текст сообщения!!!!')

@@ -58,15 +58,13 @@ AppAsset::register($this);
                 
         $items[5] = ['label' => 'YOUR ACCOUNT',
                 'items' => [
-                ['label' => 'Personal data', 'url' => ['gifts-history/index']],
-                ['label' => 'Prizes', 'url' => ['user-prizes/index']],    
-                ['label' => 'Statistics', 'url' => ['statistics/view']],
+                ['label' => 'Personal data', 'url' => ['data/settings']],
+                ['label' => 'Prizes', 'url' => ['data/prizes']],    
+                ['label' => 'Statistics', 'url' => ['data/statistics']],
                 //['label' => Yii::$app->params['languages']['en-US'], 'url' => ['site/set-language', 'language' => 'en-US']],
             ]];
 
-    }
-        
-    
+    }            
     
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
