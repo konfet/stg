@@ -56,8 +56,8 @@ class Statistics extends \yii\db\ActiveRecord
             'bonuses_received' => 'Total Bonuses Received',
             'money_converted_from_money' => 'Total Money Converted From Money',
             'bonuses_transferred' => 'Total Bonuses Transferred',
-            'items_received' => 'Total Items Received',
-            'items_sent' => 'Total Items Sent',
+            'items_received' => 'Items Received',
+            'items_sent' => 'Items Sent',
         ];
     }
 

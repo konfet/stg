@@ -146,7 +146,7 @@ class UserPrizes extends \yii\db\ActiveRecord
      * could be done only when STATUS = ACTIVE, and for any type     
      */
     
-    public function transfer(){
+    public function transfer($silent = false){
         $stat = $this->user->statistics;
         $transaction = \Yii::$app->db->beginTransaction();
         try {            
@@ -160,7 +160,7 @@ class UserPrizes extends \yii\db\ActiveRecord
                     $text = 'Your bonuses was transferred! Check your loyalty account.';
                     break;
                 case self::T_GIFT:
-                    $stat->items_sent += 1;
+                    $stat->items_sent = $stat->items_sent . $this->item->name . ',';
                     $text = 'Your gift was sent! Check your mailbox in 2-3 days.';
                     break;
                 default:
@@ -172,8 +172,12 @@ class UserPrizes extends \yii\db\ActiveRecord
         }
         catch (Exception $e) {
             $transaction->rollBack();
+            return false;
         }
-        Yii::$app->session->setFlash('actionDone', $text);
+        if (!$silent) {
+            Yii::$app->session->setFlash('actionDone', $text);
+        }
+        return true;
     }
     /**
      * could be done only when STATUS = ACTIVE     
@@ -248,7 +252,7 @@ class UserPrizes extends \yii\db\ActiveRecord
             $rand_key = array_rand($arr);
             $prize->item_id = $arr[$rand_key]['id']; 
             $prize->value = 1;
-            $stat->items_received += 1;            
+            $stat->items_received = $stat->items_received . $prize->item->name . ',';            
         }
         else {            
             $prize->value = random_int(self::eMin($type), self::eMax($type));

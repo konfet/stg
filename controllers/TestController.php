@@ -46,7 +46,7 @@ class TestController extends Controller
 //  run one migration
 //                $output = $this->run('/home/httpd/fcgi-bin/a47370_fmas/php-cli /home/httpd/vhosts/fotomas.ru/subdomains/test11/httpdocs/basic/yii migrate/to m211016_074240_create_statistics_table --interactive=0');  
 //  redo 10 last migration
-               $output = $this->run('/home/httpd/fcgi-bin/a47370_fmas/php-cli /home/httpd/vhosts/fotomas.ru/subdomains/test11/httpdocs/basic/yii migrate/redo 10 --interactive=0');  
+                //$output = $this->run('/home/httpd/fcgi-bin/a47370_fmas/php-cli /home/httpd/vhosts/fotomas.ru/subdomains/test11/httpdocs/basic/yii migrate/redo 10 --interactive=0');  
                 
   
 //  migrate                
@@ -54,6 +54,10 @@ class TestController extends Controller
 
 //  redo                
                 //$output = $this->run('/home/httpd/fcgi-bin/a47370_fmas/php-cli /home/httpd/vhosts/fotomas.ru/subdomains/test11/httpdocs/basic/yii migrate/redo --interactive=0');
+                
+                
+//  run bulk command
+                $output = $this->run('/home/httpd/fcgi-bin/a47370_fmas/php-cli /home/httpd/vhosts/fotomas.ru/subdomains/test11/httpdocs/basic/yii bulk/transfer-money 5');
                 return '<pre><br>' . print_r($output) . '</pre>';                
 /*                
                 $output = $this->run([

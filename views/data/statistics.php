@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 $this->title = 'Statistics';
 ?>
 
-<div class="col-lg-6">
+<div class="col-lg-12">
 
     <h1><?= Html::encode($this->title) ?></h1>
     
@@ -16,7 +16,8 @@ $this->title = 'Statistics';
             [
                 'attribute' => 'user_id',
                 'label' => 'Actual amount of money',
-                'value' => $model->user->activeMoney,                
+                'value' => $model->user->activeMoney,   
+                'contentOptions' => ['style'=>'width: 80%;'],
             ],
             [
                 'attribute' => 'user_id',
@@ -34,7 +35,13 @@ $this->title = 'Statistics';
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'money_received',
+            [
+                'attribute' => 'money_received',
+                //'label' => 'Actual amount of bonuses',
+                //'value' => $model->user->activeBonuses,                
+                'contentOptions' => ['style'=>'width: 80%;'],
+            ],
+            
             'money_transferred',
             'money_converted_to_bonuses',
             'bonuses_received',
